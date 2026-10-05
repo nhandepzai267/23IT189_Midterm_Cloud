@@ -1,0 +1,50 @@
+<h2>Quản Lý Sách (Cloud Computing)</h2>
+
+{{#if error}}
+  <p class="error">{{error}}</p>
+{{/if}}
+
+<h3>Thêm Sách Mới</h3>
+<form action="/add-book" method="POST">
+  <div class="form-group">
+    <label>Mã sản phẩm (Bắt đầu bằng 189):</label><br>
+    <input type="text" name="productCode" placeholder="Ví dụ: 189001" required>
+  </div>
+  <div class="form-group">
+    <label>Tên sách:</label><br>
+    <input type="text" name="name" placeholder="Tên cuốn sách" required>
+  </div>
+  <div class="form-group">
+    <label>Giá chưa thuế (VNĐ):</label><br>
+    <input type="number" name="price" placeholder="100000" required>
+  </div>
+  <button type="submit">Thêm Sách</button>
+</form>
+
+<hr>
+
+<h3>Danh Sách Sách</h3>
+<table>
+  <thead>
+    <tr>
+      <th>Mã SP</th>
+      <th>Tên Sách</th>
+      <th>Giá gốc</th>
+      <th>Thành tiền (Đã tính VAT {{vatRate}}%)</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each books}}
+      <tr>
+        <td>{{this.productCode}}</td>
+        <td>{{this.name}}</td>
+        <td>{{this.priceBeforeTax}} VNĐ</td>
+        <td>{{this.priceAfterTax}} VNĐ</td>
+      </tr>
+    {{else}}
+      <tr>
+        <td colspan="4">Chưa có dữ liệu sách.</td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>
